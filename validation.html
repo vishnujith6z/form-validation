@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2f8;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #bbb;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1a5276;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #2471a3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #154360;
+        }
+
+        .reset {
+            background-color: #777;
+            margin-top: 10px;
+        }
+
+        .reset:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>User Registration Form</h2>
+
+    <form id="userForm" onsubmit="return validateForm()">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" placeholder="Enter your email">
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="text" id="mobile"
+               placeholder="Enter 10-digit mobile number"
+               maxlength="10">
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter username">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password"
+               placeholder="Enter password">
+
+        <button type="submit">Submit</button>
+        <button type="reset" class="reset">Reset</button>
+
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let mobile = document.getElementById("mobile").value.trim();
+        let username = document.getElementById("username").value.trim();
+        let password = document.getElementById("password").value;
+
+        // Validate Name
+        let namePattern = /^[A-Za-z ]+$/;
+
+        if (name === "" || !namePattern.test(name)) {
+            alert("Please enter a valid name using letters and spaces only.");
+            return false;
+        }
+
+        // Validate Email
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        // Validate Mobile Number
+        let mobilePattern = /^[0-9]{10}$/;
+
+        if (!mobilePattern.test(mobile)) {
+            alert("Mobile number must contain exactly 10 digits.");
+            return false;
+        }
+
+        // Validate Username
+        if (username === "") {
+            alert("Username cannot be empty.");
+            return false;
+        }
+
+        // Validate Password
+        let passwordPattern =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])\S{8,}$/;
+
+        if (!passwordPattern.test(password)) {
+            alert(
+                "Password must contain at least 8 characters, " +
+                "one uppercase letter, one lowercase letter, " +
+                "one digit, and one special character. " +
+                "Spaces are not allowed."
+            );
+            return false;
+        }
+
+        // If all validations pass
+        alert("Form submitted successfully!");
+        return true;
+    }
+</script>
+
+</body>
+</html>
